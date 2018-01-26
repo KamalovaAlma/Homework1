@@ -11,7 +11,6 @@ C=0
 n=5
 m=40
 
-#u = [[0]*(m+1) for i in range(n+1)]
 alpha=[]
 betta=[]
 
@@ -26,7 +25,7 @@ def main():
 
 			u1 = execM1(u, h, tau)
 			E = execE(u1, h, tau)
-			#print('M1: h=',h,' tau=',tau,' E=',E)
+			print('M1: h=',h,' tau=',tau,' E=',E)
 			#print(E)
 
 			u = [[0]*(m+1) for i in range(n+1)]
