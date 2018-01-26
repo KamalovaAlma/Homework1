@@ -15,10 +15,13 @@ alpha=[]
 betta=[]
 
 def main():
-	for n in [5,15,25,35]:
+	global n
+	global m
+	for n in [5,15,25,35]:#
 		#print('n=',n)
-		h=math.pi/n
-		for m in [40,80,160,320]:
+
+		for m in [40,80,160,320]:#
+			h=math.pi/n
 			tau=10/m
 
 			u = [[0]*(m+1) for i in range(n+1)]
@@ -129,8 +132,8 @@ def execM3(u, A, B, C, h, tau):
 
 		for i in range(1,n):
 			alpha[i+1] = -B/(A*alpha[i]+C)
-			FF=-tau*u[i-1][j]/(2*h**2) - (1-tau/(h**2))*u[i][j] - tau*u[i+1][j]/(2*h**2)-tau*getGij(i*h, j*tau)
-			betta[i+1]=(FF-A*betta[i])/(A*alpha[i]+C)
+			F=-(tau*u[i-1][j]/(2*h**2) + (1-tau/(h**2))*u[i][j] + tau*u[i+1][j]/(2*h**2) + tau*getGij(i*h, j*tau))
+			betta[i+1]=(F-A*betta[i])/(A*alpha[i]+C)
 
 		for i in reversed((range(1,n))):
 			u[i][j+1] = alpha[i+1] * u[i+1][j+1] + betta[i+1]
@@ -144,7 +147,7 @@ def printU(u):
 
 #u(x; t) = sin(x) + ln(t^2 + 1):
 def getUxt(x,t):
-	return math.sin(x + math.log(t ** 2 +1))
+	return math.sin(x) + math.log(t ** 2 +1)
 
 def getGij(xi, tj):
 	return math.sin(xi) + (2*tj)/(tj**2 + 1)
